@@ -1,6 +1,10 @@
+require 'csv'
+
 # accepts a CSV of topics
 # creates a nested array of topics
 # [['cat'], ['puppies'], ['bunnies']]
+
+data = CSV.read("research_interests_raw.csv")
 
 # create variants of each topic 
   # =>
@@ -21,14 +25,28 @@
 # write names interests to csv
 # csv << name, interests
 
-
 # ===== VARIANTS =====
 
 # random capitalization
 # 'cat' => 'cAT'
+def rand_caps(str)
+  capitals = rand(1..str.length - 1)
+  counter = 0
+  while counter < capitals
+    p strIndex = rand(str.length - 1)
+    str[strIndex] = str[strIndex].capitalize
+    counter += 1
+  end
+  str
+end
+
 
 # mispellings
 # 'cat' => 'cate'
 
 # whitespace
 # 'cat' => '   cat  '
+
+# ===== SANDBOX =====
+# p rand_caps(data[0][0])
+# p data
