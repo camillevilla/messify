@@ -40,13 +40,18 @@ def rand_caps(str)
   str
 end
 
-
-# mispellings
+# misspellings
 # 'cat' => 'cate'
+def misspell(str)
+  letter = ('a'..'z').to_a.sample
+  strIndex = rand(str.length - 1)
+  str = str.insert(strIndex, letter)
+end
 
 # whitespace
 # 'cat' => '   cat  '
 
 # ===== SANDBOX =====
 # p rand_caps(data[0][0])
+# p misspell(data[0][0])
 # p data
