@@ -6,29 +6,20 @@ require 'csv'
 # [['cat'], ['puppies'], ['bunnies']]
 
 topics = CSV.read("research_interests_raw.csv")
-p topics
-p topics[0]
+topics = topics.flatten
 
-# create variants of each topic 
-  # => [['cAT'], ['puppies   '], ['buNNiesz']]
-topics.map! do |topic|
-  topic[0] = [messify(topic[0])]
+def generate_groups(total, size, topics)
+  groups = []
+  counter = 0
+  while counter < total
+    current = topics.sample(size)
+    groups << current
+    counter += 1
+  end
+  groups
 end
 
-p topics
-
-# randomly select several unique topics for groups
-# OK: ['cAT', 'puppies  ', 'bunnies']
-# NOT ok: ['cat', 'cAT', 'puppies']
-
-# def generate_groups(num, topics)
-#   groups = []
-#   counter = 0
-#   while counter < num
-
-#     counter += 1
-#   end
-# end
+p groups = generate_groups(50, 3, topics)
 
 # join topics array into a string
 # ['cAT', 'puppies  ', 'bunnies'] => 'cAT,puppies  ,bunnies '
