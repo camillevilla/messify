@@ -50,8 +50,12 @@ end
 
 # whitespace
 # 'cat' => '   cat  '
+def whitespacer(str)
+  str.ljust(rand(str.length..10)).rjust(rand(str.length..10))
+end
 
 # ===== SANDBOX =====
 # p rand_caps(data[0][0])
 # p misspell(data[0][0])
+p whitespacer(data[0][0])
 # p data
