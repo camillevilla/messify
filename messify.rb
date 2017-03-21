@@ -1,31 +1,4 @@
-require 'csv'
-
-# accepts a CSV of topics
-# creates a nested array of topics
-# [['cat'], ['puppies'], ['bunnies']]
-
-data = CSV.read("research_interests_raw.csv")
-
-# create variants of each topic 
-  # =>
-  # [['cat', 'cAT', '    cat'], 
-  # ['puppies', 'pUPPies', 'puppies   '],
-  # ['bunnies', 'buNNies', '  bunnies  ']]
-
-# randomly select several unique topics for groups
-# OK: ['cAT', 'puppies  ', 'bunnies']
-# NOT ok: ['cat', 'cAT', 'puppies']
-
-# join topics array into a string
-# ['cAT', 'puppies  ', 'bunnies'] => 'cAT,puppies  ,bunnies '
-
-# use Faker to randomly generate names
-# push to results array
-
-# write names interests to csv
-# csv << name, interests
-
-# ===== VARIANTS =====
+# ===== Methods for creating variants =====
 
 # random capitalization
 # 'cat' => 'cAT'
@@ -33,7 +6,7 @@ def rand_caps(str)
   capitals = rand(1..str.length - 1)
   counter = 0
   while counter < capitals
-    p strIndex = rand(str.length - 1)
+    strIndex = rand(str.length - 1)
     str[strIndex] = str[strIndex].capitalize
     counter += 1
   end
@@ -51,11 +24,21 @@ end
 # whitespace
 # 'cat' => '   cat  '
 def whitespacer(str)
-  str.ljust(rand(str.length..10)).rjust(rand(str.length..10))
+  rand_num = rand(str.length..str.length + 10)
+  str.ljust(rand_num).rjust(rand_num + rand(10))
 end
 
-# ===== SANDBOX =====
-# p rand_caps(data[0][0])
-# p misspell(data[0][0])
-p whitespacer(data[0][0])
-# p data
+# select randomly select variant method
+def messify(str)
+  num = rand(0..3)
+  case num
+    when 0
+      return rand_caps(str)
+    when 1
+      return misspell(str)
+    when 2
+      return whitespacer(str)
+    else
+      return str
+    end
+end
